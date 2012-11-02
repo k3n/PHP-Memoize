@@ -9,15 +9,15 @@ PHP Memoize
 
 We will use this simple factorial function to demonstrate the reduction in required invocations:
 
-    ```php
-    $c = 0;
-    function factorial($n) {
-        global $c;
-        ++$c;
-        if ($n == 0) return 1;
-        return $n * factorial($n - 1);
-    }
-    ```
+```php
+$c = 0;
+function factorial($n) {
+    global $c;
+    ++$c;
+    if ($n == 0) return 1;
+    return $n * factorial($n - 1);
+}
+```
 
 The global is simply used for counting invocations.
 
@@ -28,7 +28,7 @@ Other benchmark code (namely, calls to `microtime()`) have been omitted.
 ```php
 $i = pow(10, 4);
 while (--$i) {
-$x = factorial(10);
+    $x = factorial(10);
 }
 ```
 
@@ -36,12 +36,14 @@ Locally, this took an average of **.032** seconds, and required **109989** invoc
 
 ### Now, memoized
     
-    $i = pow(10, 4);
-    $fact = memoize('factorial', function($args){
-        return $args[0];
-    });
-    while (--$i) {
-        $x = $fact(10);
-    }
+```php
+$i = pow(10, 4);
+$fact = memoize('factorial', function($args){
+    return $args[0];
+});
+while (--$i) {
+    $x = $fact(10);
+}
+```
 
 Locally, this took an average of **.012** seconds, and required **11** invocations of `factorial()`.
