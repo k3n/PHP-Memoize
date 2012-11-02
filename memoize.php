@@ -6,7 +6,8 @@
  * tradeoff whereby we are trading memory space for computation time. The more
  * use your memoized function sees, the more memory will be used; however, if
  * there are repeated function calls that will yield the same result, then we
- * end up calling the wrapped functional less frequently.
+ * end up calling the original [now-wrapped] function less frequently than if
+ * it had not been memoized.
  *
  * @param callable $func - the function to optimize
  * @param callable $hash - the function to calculate the hash; it will receive a
