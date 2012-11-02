@@ -28,7 +28,7 @@ Other benchmark code (namely, calls to `microtime()`) have been omitted.
 ```php
 $i = pow(10, 4);
 while (--$i) {
-    $x = factorial(10);
+    factorial(10);
 }
 ```
 
@@ -42,7 +42,7 @@ $fact = memoize('factorial', function($args){
     return $args[0];
 });
 while (--$i) {
-    $x = $fact(10);
+    $fact(10);
 }
 ```
 
