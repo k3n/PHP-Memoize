@@ -1,7 +1,7 @@
 PHP Memoize
 ==============
 
-[Memoize on Wikipedia](http://en.wikipedia.org/wiki/Memoization)
+[Memoization on Wikipedia](http://en.wikipedia.org/wiki/Memoization)
 
 ------
 
