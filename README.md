@@ -9,6 +9,7 @@ PHP Memoize
 
 We will use this simple factorial function to demonstrate the reduction in required invocations:
 
+    ```php
     $c = 0;
     function factorial($n) {
         global $c;
