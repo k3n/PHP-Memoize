@@ -7,7 +7,7 @@ PHP Memoize
 
 ### Demo
 
-We will use this simple factorial function just to demonstrate the reduction in required invocations:
+We will use this simple factorial function to demonstrate the reduction in required invocations:
 
     $c = 0;
     function factorial($n) {
@@ -19,7 +19,7 @@ We will use this simple factorial function just to demonstrate the reduction in 
 
 The global is simply used for counting invocations.
 
-Other benchmark code (namely, calls to `microtime()`) has been omitted.
+Other benchmark code (namely, calls to `microtime()`) have been omitted.
 
 ### First, the long way
 
@@ -28,7 +28,7 @@ Other benchmark code (namely, calls to `microtime()`) has been omitted.
         $x = factorial(10);
     }
 
-Locally, this took an average of .032 seconds, and required 109989 invocations of `factorial()`.
+Locally, this took an average of **.032** seconds, and required **109989** invocations of `factorial()`.
 
 ### Now, memoized
     
@@ -40,4 +40,4 @@ Locally, this took an average of .032 seconds, and required 109989 invocations o
         $x = $fact(10);
     }
 
-Locally, this took an average of .012 seconds, and required 11 invocations of `factorial()`.
+Locally, this took an average of **.012** seconds, and required **11** invocations of `factorial()`.
