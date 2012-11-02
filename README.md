@@ -38,11 +38,11 @@ Locally, this took an average of **.032** seconds, and required **109989** invoc
     
 ```php
 $i = pow(10, 4);
-$fact = memoize('factorial', function($args){
+$factorial = memoize('factorial', function($args){
     return $args[0];
 });
 while (--$i) {
-    $fact(10);
+    $factorial(10);
 }
 ```
 
