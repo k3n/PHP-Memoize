@@ -17,6 +17,7 @@ We will use this simple factorial function to demonstrate the reduction in requi
         if ($n == 0) return 1;
         return $n * factorial($n - 1);
     }
+    ```
 
 The global is simply used for counting invocations.
 
@@ -24,10 +25,12 @@ Other benchmark code (namely, calls to `microtime()`) have been omitted.
 
 ### First, the long way
 
-    $i = pow(10, 4);
-    while (--$i) {
-        $x = factorial(10);
-    }
+```php
+$i = pow(10, 4);
+while (--$i) {
+$x = factorial(10);
+}
+```
 
 Locally, this took an average of **.032** seconds, and required **109989** invocations of `factorial()`.
 
