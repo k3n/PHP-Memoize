@@ -1,7 +1,17 @@
 PHP Memoize
 ==============
 
+Userland implementation written in PHP 5.4, but easily downgraded to 5.3 (by removing both `callable` type hints).
+
 [Wikipedia: Memoization](http://en.wikipedia.org/wiki/Memoization)
+
+------
+function **memoize** ( callable _$fnOrig_, callable _$fnHash_ )
+------
+
+The first argument is your function to that you want to optimize.
+
+The second argument is your hashing function, which will receive a single argument -- an array representing the parameters. Your hash function should return a value that can safely be used an array key.
 
 ------
 
@@ -10,18 +20,11 @@ PHP Memoize
 We will use this simple factorial function to demonstrate the reduction in required invocations:
 
 ```php
-$c = 0;
 function factorial($n) {
-    global $c;
-    ++$c;
     if ($n == 0) return 1;
-    return $n * factorial($n - 1);
+    return factorial($n - 1);
 }
 ```
-
-The global is simply used for counting invocations.
-
-Other benchmark code (namely, calls to `microtime()`) have been omitted.
 
 ### First, the long way
 
@@ -32,18 +35,18 @@ while (--$i) {
 }
 ```
 
-Locally, this took an average of **.032** seconds, and required **109989** invocations of `factorial()`.
+This requires **109989** invocations of `factorial()`.
 
 ### Now, memoized
     
 ```php
-$i = pow(10, 4);
-$factorial = memoize('factorial', function($args){
+$fact = memoize('factorial', function($args){
     return $args[0];
 });
+$i = pow(10, 4);
 while (--$i) {
-    $factorial(10);
+    $fact(10);
 }
 ```
 
-Locally, this took an average of **.012** seconds, and required **11** invocations of `factorial()`.
+Here, **11** invocations of `factorial()`.
