@@ -68,16 +68,19 @@ $fact = memoize('math::factorial', 'lib::hash');
 ```
 
 ```php
-$toJson = memoize(function ($user, $action) {
-    return json_encode(['user' => $user, 'action' => $action]);
-}, function ($args) {
-    return vsprintf("%d:%s", $args);
-});
-```
-
-```php
 $apiGetUserData = memoize(
     [new Api, 'getUserData'],
     [new Hasher, 'hashUserData']
 );
+```
+
+```php
+$Logger = new Logger;
+$toJson = memoize(function ($user, $action) use ($Logger) {
+    $Logger->warn('cache miss');
+    return json_encode(['user' => $user, 'action' => $action]);
+}, function ($args) use ($Logger) {
+    $Logger->info('cache lookup');
+    return vsprintf("%d:%s", $args);
+});
 ```
