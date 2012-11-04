@@ -9,9 +9,11 @@ Userland implementation written in PHP 5.4, but easily downgraded to 5.3 (by rem
 function **memoize** ( callable _$fnOrig_, callable _$fnHash_ )
 ------
 
-The first argument is your function to that you want to optimize.
+The first argument is your function to optimize.
 
 The second argument is your hashing function, which will receive a single argument -- an array representing the parameters. Your hash function should return a value that can safely be used an array key.
+
+Both arguments will be invoked as the first argument to [call_user_func()](http://php.net/manual/en/function.call-user-func.php).
 
 ------
 
@@ -40,7 +42,7 @@ This requires **109989** invocations of `factorial()`.
 ### Now, memoized
     
 ```php
-$fact = memoize('factorial', function($args){
+$fact = memoize('factorial', function($args) {
     return $args[0];
 });
 $i = pow(10, 4);
@@ -50,3 +52,32 @@ while (--$i) {
 ```
 
 Here, **11** invocations of `factorial()`.
+
+------
+
+### Variations
+
+This function is extremely flexible:
+
+```php
+$fact = memoize('factorial', 'your_hasher');
+```
+
+```php
+$fact = memoize('math::factorial', 'lib::hash');
+```
+
+```php
+$toJson = memoize(function ($user, $action) {
+    return json_encode(['user' => $user, 'action' => $action]);
+}, function ($args) {
+    return vsprintf("%d:%s", $args);
+});
+```
+
+```php
+$apiGetUserData = memoize(
+    [new Api, 'getUserData'],
+    [new Hasher, 'hashUserData']
+);
+```
