@@ -6,15 +6,30 @@ Userland implementation written in PHP 5.4, but easily downgraded to 5.3 (by rem
 [Wikipedia: Memoization](http://en.wikipedia.org/wiki/Memoization)
 
 ------
+
 function **memoize** ( callable _$fnOrig_, callable _$fnHash_ )
+
 ------
 
+_**fnOrig**_
+
+```
 The first argument is your function to optimize.
+```
 
-The second argument is your hashing function, which will receive a single argument -- an array representing the parameters. Your hash function should return a value that can safely be used an array key.
+_**fnHash**_
 
-Both arguments will be invoked as the first argument to [call_user_func()](http://php.net/manual/en/function.call-user-func.php).
+```
+The second argument is your hashing function, which will receive a single argument: an array representing 
+the parameters. Your hash function should return a value that can safely be used an array key.
+```
 
+_* **Note:** both arguments will be invoked as the first argument to [call_user_func()](http://php.net/manual/en/function.call-user-func.php)._
+
+_**Return Values**_
+```
+The return value is an anonymous function that you can substitute in place of your original function call.
+```
 ------
 
 ### Demo
